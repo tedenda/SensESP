@@ -1,6 +1,9 @@
-#include "Senseair_co2.h"
+#include "senseair_co2.h"
+
+#include <RemoteDebug.h>
 
 #include "Arduino.h"
+#include "sensesp.h"
 
 SenseairCO2::SenseairCO2() {}
 
@@ -76,7 +79,7 @@ int SenseairCO2::SendCommand(byte command[]) {
   return value;
 }
 
-int SenseairCO2::ReadCo2(void) {
+int SenseairCO2::readco2ppm(void) {
   int co2 = 0;
   byte frame[8] = {0};
   BuildFrame(0xFE, 0x04, 0x03, 1, frame);
