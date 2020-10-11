@@ -1,18 +1,18 @@
-#include "senseair_s8.h"
+#include "sensors/senseair_s8.h"
+
+#include <RemoteDebug.h>
 
 #include "sensesp.h"
-//#include "i2c_tools.h"
-#include <RemoteDebug.h>
 
 Senseair_S8::Senseair_S8(int rx, int tx, String config_path)
     : Sensor(config_path) {
   load_configuration();
   senseair_s8 = new SenseairCO2(rx, tx);
-  senseair_s8->begin();
+  senseair_s8->begin(rx, tx);
 }
 
-Senseair_s8_value::Senseair_s8_value(Senseair_S8* senseairco2,
-                                     Senseair_co2_value val_type,
+Senseair_s8_value::Senseair_s8_value(Senseair_S8* senseair_s8,
+                                     Senseair_s8_value val_type,
                                      uint read_delay, String config_path)
     : NumericSensor(config_path),
       senseair_s8{senseair_s8},
